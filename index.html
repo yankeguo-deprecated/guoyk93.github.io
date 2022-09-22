@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Guo Y.K.</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="//unpkg.com/bootswatch@5.2.1/dist/flatly/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css"/>
+    <style>
+        img.avatar {
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col text-center">
+                    <img class="avatar rounded-circle" src="img/avatar-tincan.jpg" alt="avatar-image"/>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <h4><b>Guo Y.K.</b></h4>
+                    <p>A half-lying veteran in programming</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<span id="email"></span>&nbsp;&nbsp;<a
+                            target="_blank" href="bundle-af10abb1-a979a359.asc.txt"><i
+                            class="fa fa-lock"></i></a>
+                        <br/>
+                        <i class="fa fa-suitcase"></i>&nbsp;&nbsp;Pagoda, China
+                        <br/>
+                        <i class="fa fa-location-arrow"></i>&nbsp;&nbsp;Shenzhen, China
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+        </div>
+    </div>
+</div>
+<script src="//unpkg.com/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("span#email").text("hi@guoyk.net");
+    });
+</script>
+</body>
+
+</html>
