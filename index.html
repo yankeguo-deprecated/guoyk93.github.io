@@ -13,7 +13,13 @@
         }
 
         img.donation-code {
-            width: 100%;
+            width: 90%;
+        }
+
+        img.advcash-logo {
+            width: 60%;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
 
         img.crypto-logo {
@@ -35,7 +41,7 @@
 
 <body>
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-5 mb-5">
         <div class="col-md-3">
             <div class="row">
                 <div class="col text-center">
@@ -56,63 +62,85 @@
             <ul class="nav nav-tabs" id="main-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="projects-tab" data-bs-toggle="tab"
-                            data-bs-target="#projects-tab-pane"
-                            type="button" role="tab" aria-controls="projects-tab-pane" aria-selected="false">
+                            data-bs-target="#projects-tab-pane" type="button" role="tab"
+                            aria-controls="projects-tab-pane" aria-selected="false">
                         <h5 class="tab-title"><i class="fa fa-cubes"></i>&nbsp;&nbsp;Projects</h5>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="donation-tab" data-bs-toggle="tab"
-                            data-bs-target="#donation-tab-pane"
-                            type="button" role="tab" aria-controls="donation-tab-pane" aria-selected="true">
-                        <h5 class="tab-title"><i class="fa fa-dollar"></i>&nbsp;&nbsp;Donation</h5>
+                            data-bs-target="#donation-tab-pane" type="button" role="tab"
+                            aria-controls="donation-tab-pane" aria-selected="true">
+                        <h5 class="tab-title"><i class="fa fa-money"></i>&nbsp;&nbsp;Donation</h5>
                     </button>
                 </li>
 
                 <!--
-                 <li class="nav-item" role="presentation">
-                     <button class="nav-link" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects-tab-pane"
-                             type="button" role="tab" aria-controls="projects-tab-pane" aria-selected="false">Profile
-                     </button>
-                 </li>
-                 <li class="nav-item" role="presentation">
-                     <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
-                             type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact
-                     </button>
-                 </li>
-                 <li class="nav-item" role="presentation">
-                     <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
-                             type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>
-                         Disabled
-                     </button>
-                 </li>
-                 -->
+             <li class="nav-item" role="presentation">
+                 <button class="nav-link" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects-tab-pane"
+                         type="button" role="tab" aria-controls="projects-tab-pane" aria-selected="false">Profile
+                 </button>
+             </li>
+             <li class="nav-item" role="presentation">
+                 <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
+                         type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact
+                 </button>
+             </li>
+             <li class="nav-item" role="presentation">
+                 <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
+                         type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>
+                     Disabled
+                 </button>
+             </li>
+             -->
             </ul>
             <div class="tab-content mt-3" id="main-tab-content">
                 <div class="tab-pane fade show active" id="projects-tab-pane" role="tabpanel"
-                     aria-labelledby="projects-tab"
-                     tabindex="0">...
+                     aria-labelledby="projects-tab" tabindex="0">...
                 </div>
-                <div class="tab-pane fade" id="donation-tab-pane" role="tabpanel"
-                     aria-labelledby="donation-tab"
+
+                <div class="tab-pane fade" id="donation-tab-pane" role="tabpanel" aria-labelledby="donation-tab"
                      tabindex="1">
-                    <div class="row">
+
+                    <div class="row mt-4">
                         <div class="col-12">
-                            <h4><b><i class="fa fa-cny"></i>&nbsp;&nbsp;CNY</b></h4>
+                            <h5><b><i class="fa fa-bank"></i>&nbsp;&nbsp;FIAT Money</b></h5>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-3">
-                            <div class="card">
+
+                    <div class="row mt-2 row-cols-2 row-cols-md-3">
+                        <div class="col">
+                            <div class="card h-100">
                                 <div class="card-body">
-                                    <img class="donation-code" src="img/donation-wx.png"/>
+                                    <h5 class="card-title"><b><i class="fa fa-cny"></i>&nbsp;&nbsp;CNY</b></h5>
+                                    <div class="text-center">
+                                        <img alt="donation code for weixin" class="donation-code"
+                                             src="img/donation-wx.png"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title"><b><i class="fa fa-dollar"></i>&nbsp;&nbsp;USD / <i
+                                            class="fa fa-euro"></i>&nbsp;&nbsp;EUR</b></h5>
+                                    <div class="text-center">
+                                        <img alt="advcash logo" class="advcash-logo" src="img/advcash-logo.svg"/>
+                                        <h4><a href="https://advcash.com" target="_blank">Advcash</a></h4>
+                                        <br/>
+                                        <b><i class="fa fa-dollar"></i>&nbsp;&nbsp;<code>U012254891548</code></b>
+                                        <br/>
+                                        <b><i class="fa fa-euro"></i>&nbsp;&nbsp;<code>E531054054212</code></b>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="row mt-4">
                         <div class="col-12">
-                            <h4><b><i class="fa fa-bitcoin"></i>&nbsp;&nbsp;Crypto Currency</b></h4>
+                            <h5><b><i class="fa fa-bitcoin"></i>&nbsp;&nbsp;Cryptocurrency</b></h5>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -121,13 +149,13 @@
                 </div>
                 <!--
 
-                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
-                     tabindex="0">...
-                </div>
-                <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab"
-                     tabindex="0">...
-                </div>
-                -->
+            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
+                 tabindex="0">...
+            </div>
+            <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab"
+                 tabindex="0">...
+            </div>
+            -->
             </div>
         </div>
     </div>
@@ -179,7 +207,8 @@
             'infos': {
                 items: [
                     {icon: 'envelope-o', text: 'hi@guoyk.net', link: 'mailto:hi@guoyk.net'},
-                    {icon: 'lock', text: 'key-af10abb1, key-a979a359', link: 'hi@guoyk.net'},
+                    {icon: 'lock', text: 'GPG/Portable (Daily)', link: 'portable-315a5d46a979a359.asc.txt'},
+                    {icon: 'lock', text: 'GPG/Hardware (Root)', link: 'hardware-925113acaf10abb1.asc.txt'},
                     {icon: 'suitcase', text: 'Pagoda, China'},
                     {icon: 'location-arrow', text: 'Shenzhen, China'},
                 ]
