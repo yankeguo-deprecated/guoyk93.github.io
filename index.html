@@ -19,6 +19,17 @@
         img.crypto-logo {
             height: 1.1rem;
         }
+
+        td.info-header {
+            width: 1.4rem;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+        }
+
+        h5.tab-title {
+            margin-bottom: 0.2rem;
+            margin-top: 0.2rem;
+        }
     </style>
 </head>
 
@@ -37,15 +48,7 @@
                     <p>A half-lying veteran in programming</p>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<span id="inject-email"></span>&nbsp;&nbsp;<a
-                            target="_blank" href="bundle-af10abb1-a979a359.asc.txt"><i
-                            class="fa fa-lock"></i></a>
-                        <br/>
-                        <i class="fa fa-suitcase"></i>&nbsp;&nbsp;Pagoda, China
-                        <br/>
-                        <i class="fa fa-location-arrow"></i>&nbsp;&nbsp;Shenzhen, China
-                    </div>
+                    <div id="inject-infos" class="col"></div>
                 </div>
             </div>
         </div>
@@ -55,14 +58,14 @@
                     <button class="nav-link active" id="projects-tab" data-bs-toggle="tab"
                             data-bs-target="#projects-tab-pane"
                             type="button" role="tab" aria-controls="projects-tab-pane" aria-selected="false">
-                        <i class="fa fa-cubes"></i>&nbsp;&nbsp;Projects
+                        <h5 class="tab-title"><i class="fa fa-cubes"></i>&nbsp;&nbsp;Projects</h5>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="donation-tab" data-bs-toggle="tab"
                             data-bs-target="#donation-tab-pane"
                             type="button" role="tab" aria-controls="donation-tab-pane" aria-selected="true">
-                        <i class="fa fa-dollar"></i>&nbsp;&nbsp;Donation
+                        <h5 class="tab-title"><i class="fa fa-dollar"></i>&nbsp;&nbsp;Donation</h5>
                     </button>
                 </li>
 
@@ -95,10 +98,10 @@
                      tabindex="1">
                     <div class="row">
                         <div class="col-12">
-                            <p>
-                            <h5><b><i class="fa fa-cny"></i>&nbsp;&nbsp;CNY</b></h5>
-                            </p>
+                            <h4><b><i class="fa fa-cny"></i>&nbsp;&nbsp;CNY</b></h4>
                         </div>
+                    </div>
+                    <div class="row mt-3">
                         <div class="col-md-3">
                             <div class="card">
                                 <div class="card-body">
@@ -107,12 +110,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-12">
-                            <p>
-                            <h5><b><i class="fa fa-bitcoin"></i>&nbsp;&nbsp;Crypto Currency</b></h5>
-                            </p>
+                            <h4><b><i class="fa fa-bitcoin"></i>&nbsp;&nbsp;Crypto Currency</b></h4>
                         </div>
+                    </div>
+                    <div class="row mt-3">
                         <div id="inject-donation-crypto" class="col-12"></div>
                     </div>
                 </div>
@@ -132,8 +135,23 @@
 <script src="//unpkg.com/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 <script src="//unpkg.com/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="//unpkg.com/handlebars@4.7.7/dist/handlebars.min.js"></script>
-<script id="template-email" type="text/x-handlebars-template">
-    {{email}}
+<script id="template-infos" type="text/x-handlebars-template">
+    <table class="table table-borderless">
+        {{#each items}}
+            <tr>
+                <td class="info-header"><i class="fa fa-{{this.icon}}"></i></td>
+                <td>
+                    {{#if this.link}}
+                        <a target="_blank" href="{{this.link}}">
+                            {{this.text}}
+                        </a>
+                    {{else}}
+                        {{this.text}}
+                    {{/if}}
+                </td>
+            </tr>
+        {{/each}}
+    </table>
 </script>
 <script id="template-donation-crypto" type="text/x-handlebars-template">
     <div class="list-group">
@@ -158,8 +176,13 @@
 <script>
     (function () {
         const TEMPLATES = {
-            'email': {
-                email: 'hi@guoyk.net',
+            'infos': {
+                items: [
+                    {icon: 'envelope-o', text: 'hi@guoyk.net', link: 'mailto:hi@guoyk.net'},
+                    {icon: 'lock', text: 'key-af10abb1, key-a979a359', link: 'hi@guoyk.net'},
+                    {icon: 'suitcase', text: 'Pagoda, China'},
+                    {icon: 'location-arrow', text: 'Shenzhen, China'},
+                ]
             },
             'donation-crypto': {
                 addresses: [
