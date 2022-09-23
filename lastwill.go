@@ -23,12 +23,13 @@ const (
 
 var (
 	envEventName = strings.ToLower(strings.TrimSpace(os.Getenv("EVENT_NAME")))
-	envSecretKey = strings.ToLower(strings.TrimSpace(os.Getenv("SECRET_KEY")))
+	envSecretKey = strings.TrimSpace(os.Getenv("SECRET_KEY"))
 )
 
 func checkDisclosure() bool {
 	res, err := http.Get(DisclosureURL)
 	if err != nil {
+		log.Println("failed to check disclosure:", err.Error())
 		return false
 	}
 	defer res.Body.Close()

@@ -183,7 +183,7 @@
 
         <div class="col-12 text-white">
             <p>My beloved ones may have the chance to guess the key in advance.</p>
-            <p>It's the name of a bird, whose sound is the very first memory of my whole life.</p>
+            <p>It's the name of the bird, whose sound is the very first memory of my whole life.</p>
         </div>
 
     </div>
@@ -273,9 +273,8 @@
 <script>
     (function () {
         const LASTWILL_DATA = {
-            beacon: 'LOADING',
-            lastwill: 'LOADING',
-            key: 'LOADING',
+            beacon: '------',
+            key: '------',
         };
 
         const TEMPLATE_DATA = {
@@ -290,7 +289,7 @@
             },
             'projects': {
                 _remote: {
-                    name: '---',
+                    name: '------',
                     full_name: '',
                     html_url: '',
                     topics: [],
@@ -299,7 +298,7 @@
                     },
                     language: '',
                     stargazers_count: '-',
-                    description: '--- LOADING ---'
+                    description: 'Loading...'
                 },
                 items: [
                     {_remote: 'https://api.github.com/repos/guoyk93/ezops'},
@@ -387,12 +386,6 @@
             $.ajax('lastwill.beacon.txt', {
                 success: function (data) {
                     LASTWILL_DATA.beacon = data;
-                    render('lastwill');
-                }
-            });
-            $.ajax('lastwill.asc.txt', {
-                success: function (data) {
-                    LASTWILL_DATA.lastwill = data;
                     render('lastwill');
                 }
             });
