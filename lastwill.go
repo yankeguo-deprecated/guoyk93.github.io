@@ -98,7 +98,7 @@ func main() {
 			return
 		}
 
-		err = os.WriteFile(FileKey, []byte(envSecretKey), 0640)
+		err = os.WriteFile(FileKey, []byte(envSecretKey), 0644)
 	}
 
 }
