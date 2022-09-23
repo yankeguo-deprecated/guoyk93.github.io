@@ -65,14 +65,14 @@
         <div class="col-md-7 col-lg-8 col-xl-9">
             <ul class="nav nav-pills" id="main-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="projects-tab" data-bs-toggle="tab"
+                    <button class="nav-link active" data-hash="projects" id="projects-tab" data-bs-toggle="tab"
                             data-bs-target="#projects-tab-pane" type="button" role="tab"
                             aria-controls="projects-tab-pane" aria-selected="false">
                         <h5 class="tab-title"><i class="fa fa-cubes"></i>&nbsp;&nbsp;Projects</h5>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="donation-tab" data-bs-toggle="tab"
+                    <button class="nav-link" data-hash="donation" id="donation-tab" data-bs-toggle="tab"
                             data-bs-target="#donation-tab-pane" type="button" role="tab"
                             aria-controls="donation-tab-pane" aria-selected="true">
                         <h5 class="tab-title"><i class="fa fa-money"></i>&nbsp;&nbsp;Donation</h5>
@@ -80,7 +80,7 @@
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="lastwill-tab" data-bs-toggle="tab"
+                    <button class="nav-link" data-hash="lastwill" id="lastwill-tab" data-bs-toggle="tab"
                             data-bs-target="#lastwill-tab-pane" type="button" role="tab"
                             aria-controls="lastwill-tab-pane" aria-selected="false">
                         <h5 class="tab-title text-white"><i class="fa fa-file-o"></i>&nbsp;&nbsp;Last Will</h5>
@@ -408,10 +408,17 @@
             });
 
             // handle click
-            const hash = location.hash;
-            if (hash) {
-                $(hash + "-tab").click();
-            }
+            $('button[data-bs-toggle="tab"]').on('show.bs.tab', function () {
+                const hash = $(this).attr('data-hash');
+                location.hash = hash;
+            });
+
+            (function () {
+                const hash = location.hash;
+                if (hash) {
+                    $('button[data-hash="' + hash.substring(1) + '"]').click();
+                }
+            })();
         });
     })();
 </script>
