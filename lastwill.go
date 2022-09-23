@@ -13,7 +13,7 @@ import (
 
 const (
 	DisclosureURL  = "https://guoyk93.github.io/lastwill.key.txt"
-	DisclosureTerm = time.Hour * 24 * 14
+	DisclosureTerm = time.Minute * 15
 
 	FileBeacon = "lastwill.beacon.txt"
 	FileKey    = "lastwill.key.txt"
