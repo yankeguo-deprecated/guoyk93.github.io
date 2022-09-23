@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"errors"
+	"flag"
 	"log"
 	"net/http"
 	"os"
@@ -12,10 +13,12 @@ import (
 
 const (
 	DisclosureURL  = "https://guoyk93.github.io/lastwill.key.txt"
-	DisclosureDays = 14
+	DisclosureTerm = time.Hour * 24 * 14
 
-	FileBeacon = "beacon.txt"
+	FileBeacon = "lastwill.beacon.txt"
 	FileKey    = "lastwill.key.txt"
+
+	EventSchedule = "schedule"
 )
 
 var (
@@ -42,37 +45,59 @@ func main() {
 		os.Exit(1)
 	}()
 
-	log.Println("triggered by:", envEventName)
+	var (
+		optBeacon   bool
+		optDisclose bool
+	)
 
-	if envEventName == "schedule" {
-		if checkDisclosure() {
-			err = errors.New("lastwill.key.txt is already disclosured")
+	flag.BoolVar(&optBeacon, "beacon", false, "update beacon.txt")
+	flag.BoolVar(&optDisclose, "disclose", false, "disclose the secret key")
+	flag.Parse()
+
+	if optBeacon {
+
+		err = os.WriteFile(FileBeacon, []byte(time.Now().Format(time.RFC3339)), 0640)
+
+	} else if optDisclose {
+
+		log.Println("triggered by:", envEventName)
+
+		if envEventName == EventSchedule {
+			if checkDisclosure() {
+				err = errors.New("key is already disclosed, stopping the workflow")
+				return
+			}
+		}
+
+		log.Println("reading beacon:", FileBeacon)
+
+		var buf []byte
+		if buf, err = os.ReadFile(FileBeacon); err != nil {
 			return
 		}
+
+		buf = bytes.TrimSpace(buf)
+
+		var beacon time.Time
+		if beacon, err = time.Parse(time.RFC3339, string(buf)); err != nil {
+			return
+		}
+
+		log.Println("beacon:", beacon.Format(time.RFC3339))
+
+		if time.Now().Sub(beacon) < DisclosureTerm {
+			log.Println("deadline not reached")
+			return
+		}
+
+		log.Println("disclosing key")
+
+		if envSecretKey == "" {
+			err = errors.New("missing environment variable SECRET_KEY")
+			return
+		}
+
+		err = os.WriteFile(FileKey, []byte(envSecretKey), 0640)
 	}
 
-	log.Println("reading beacon:", FileBeacon)
-
-	var buf []byte
-	if buf, err = os.ReadFile(FileBeacon); err != nil {
-		return
-	}
-
-	buf = bytes.TrimSpace(buf)
-
-	var beacon time.Time
-	if beacon, err = time.Parse(time.RFC3339, string(buf)); err != nil {
-		return
-	}
-
-	log.Println("beacon:", beacon.Format(time.RFC3339))
-
-	if time.Now().Sub(beacon) < time.Hour*24*DisclosureDays {
-		log.Println("looks good")
-		return
-	}
-
-	log.Println("disclose secret key")
-
-	err = os.WriteFile(FileKey, []byte(envSecretKey), 0640)
 }

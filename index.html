@@ -80,10 +80,10 @@
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="lastwords-tab" data-bs-toggle="tab"
-                            data-bs-target="#lastwords-tab-pane"
-                            type="button" role="tab" aria-controls="lastwords-tab-pane" aria-selected="false">
-                        <h5 class="tab-title text-white"><i class="fa fa-file-o"></i>&nbsp;&nbsp;Last Words</h5>
+                    <button class="nav-link" id="lastwill-tab" data-bs-toggle="tab"
+                            data-bs-target="#lastwill-tab-pane" type="button" role="tab"
+                            aria-controls="lastwill-tab-pane" aria-selected="false">
+                        <h5 class="tab-title text-white"><i class="fa fa-file-o"></i>&nbsp;&nbsp;Last Will</h5>
                     </button>
                 </li>
             </ul>
@@ -122,7 +122,8 @@
                                             class="fa fa-euro"></i>&nbsp;&nbsp;EUR</b></h5>
                                     <div class="text-center">
                                         <img alt="advcash logo" class="w-75 mt-5 mb-4" src="img/advcash-logo.svg"/>
-                                        <h4><a href="https://advcash.com" target="_blank">Advcash&nbsp;&nbsp;<small><i
+                                        <h4><a href="https://advcash.com"
+                                               target="_blank">Advcash&nbsp;&nbsp;<small><i
                                                 class="fa fa-external-link"></i></small></a></h4>
                                         <br/>
                                         <b><i class="fa fa-dollar"></i>&nbsp;&nbsp;<code>U012254891548</code></b>
@@ -144,8 +145,11 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="lastwords-tab-pane" role="tabpanel" aria-labelledby="lastwords-tab"
-                     tabindex="2">...
+                <div class="tab-pane fade" id="lastwill-tab-pane" role="tabpanel" aria-labelledby="lastwill-tab"
+                     tabindex="2">
+                    <div class="row">
+                        <div id="inject-lastwill" class="col-12"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,6 +158,36 @@
 <script src="//unpkg.com/jquery@3.6.1/dist/jquery.min.js"></script>
 <script src="//unpkg.com/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="//unpkg.com/handlebars@4.7.7/dist/handlebars.min.js"></script>
+<script id="template-lastwill" type="text/x-handlebars-template">
+    <div class="row">
+        <div class="col-12">
+            <p>I build an automatic disclosure system for my last will.</p>
+            <p>If I failed to renew the beacon file for 14 days, the encryption key of my last will will be disclosed
+                automatically.</p>
+        </div>
+
+        <div class="col-12">
+            <p><a target="_blank" href="lastwill.asc.txt">Link to my last will (encrypted) &nbsp;&nbsp;<i
+                    class="fa fa-external-link"></i></a></p>
+        </div>
+
+        <div class="col-6">
+            <label><b>Beacon</b></label>
+            <p><code>{{data.beacon}}</code></p>
+        </div>
+
+        <div class="col-6">
+            <label><b>Key</b></label>
+            <p><code>{{data.key}}</code></p>
+        </div>
+
+        <div class="col-12 text-white">
+            <p>My beloved ones may have the chance to guess the key in advance.</p>
+            <p>It's the name of a bird, whose sound is the very first memory of my whole life.</p>
+        </div>
+
+    </div>
+</script>
 <script id="template-infos" type="text/x-handlebars-template">
     <table class="table table-borderless">
         {{#each items}}
@@ -238,6 +272,12 @@
 </script>
 <script>
     (function () {
+        const LASTWILL_DATA = {
+            beacon: 'LOADING',
+            lastwill: 'LOADING',
+            key: 'LOADING',
+        };
+
         const TEMPLATE_DATA = {
             'infos': {
                 items: [
@@ -250,7 +290,7 @@
             },
             'projects': {
                 _remote: {
-                    name: '-',
+                    name: '---',
                     full_name: '',
                     html_url: '',
                     topics: [],
@@ -259,7 +299,7 @@
                     },
                     language: '',
                     stargazers_count: '-',
-                    description: '...LOADING...'
+                    description: '--- LOADING ---'
                 },
                 items: [
                     {_remote: 'https://api.github.com/repos/guoyk93/ezops'},
@@ -298,6 +338,9 @@
                         link: "https://blockchair.com/zcash/address/t1UaDf3RdqfPyaZ9txJ9bLXvjCMdhFT7PQ5"
                     }
                 ]
+            },
+            'lastwill': {
+                data: LASTWILL_DATA,
             }
         };
 
@@ -336,12 +379,35 @@
             }
         }
 
-        function updateRemoteData() {
-        }
 
         $(document).ready(function () {
             render();
 
+            // handle lastwill loading
+            $.ajax('lastwill.beacon.txt', {
+                success: function (data) {
+                    LASTWILL_DATA.beacon = data;
+                    render('lastwill');
+                }
+            });
+            $.ajax('lastwill.asc.txt', {
+                success: function (data) {
+                    LASTWILL_DATA.lastwill = data;
+                    render('lastwill');
+                }
+            });
+            $.ajax('lastwill.key.txt', {
+                success: function (data) {
+                    LASTWILL_DATA.key = data;
+                    render('lastwill');
+                },
+                error: function () {
+                    LASTWILL_DATA.key = 'N/A';
+                    render('lastwill');
+                }
+            });
+
+            // handle click
             const hash = location.hash;
             if (hash) {
                 $(hash + "-tab").click();
