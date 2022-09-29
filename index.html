@@ -148,7 +148,10 @@
                 <div class="tab-pane fade" id="lastwill-tab-pane" role="tabpanel" aria-labelledby="lastwill-tab"
                      tabindex="2">
                     <div class="row">
-                        <div id="inject-lastwill" class="col-12"></div>
+                        <div class="col-12">
+                            Jump to <a target="_blank" href="/lastwill">
+                            Dedicated Page&nbsp;&nbsp;<i class="fa fa-external-link"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -158,46 +161,6 @@
 <script src="//unpkg.com/jquery@3.6.1/dist/jquery.min.js"></script>
 <script src="//unpkg.com/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="//unpkg.com/handlebars@4.7.7/dist/handlebars.min.js"></script>
-<script id="template-lastwill" type="text/x-handlebars-template">
-    <div class="row">
-        <div class="col-12">
-            <p>I build an automatic disclosure system for my last will.</p>
-            <p>If I failed to renew the beacon file for 14 days, the decryption key of my last will will be disclosed
-                automatically.</p>
-        </div>
-
-        <div class="col-12">
-            <p>
-                The encrypted file is published to npm package
-                <a target="_blank" href="https://www.npmjs.com/package/guoyk93-lastwish">guoyk93-lastwish</a>.
-            </p>
-            <p>
-                You can also download from <code>unpkg.com</code>.
-            </p>
-            <p>
-                <a target="_blank" href="https://unpkg.com/guoyk93-lastwish/lastwish.txt.asc">
-                    Link to my last will (encrypted) &nbsp;&nbsp;<i class="fa fa-external-link"></i>
-                </a>
-            </p>
-        </div>
-
-        <div class="col-6">
-            <label><b>Beacon</b></label>
-            <p><code>{{data.beacon}}</code></p>
-        </div>
-
-        <div class="col-6">
-            <label><b>Decryption Key</b></label>
-            <p><code>{{data.key}}</code></p>
-        </div>
-
-        <div class="col-12 text-white">
-            <p>My beloved ones may have the chance to guess the key in advance.</p>
-            <p>It's the name of the bird, whose sound is the very first memory of my whole life.</p>
-        </div>
-
-    </div>
-</script>
 <script id="template-infos" type="text/x-handlebars-template">
     <table class="table table-borderless">
         {{#each items}}
@@ -282,11 +245,6 @@
 </script>
 <script>
     (function () {
-        const LASTWILL_DATA = {
-            beacon: '------',
-            key: '------',
-        };
-
         const TEMPLATE_DATA = {
             'infos': {
                 items: [
@@ -350,9 +308,6 @@
                         link: "https://blockchair.com/zcash/address/t1UaDf3RdqfPyaZ9txJ9bLXvjCMdhFT7PQ5"
                     }
                 ]
-            },
-            'lastwill': {
-                data: LASTWILL_DATA,
             }
         };
 
@@ -395,25 +350,7 @@
         $(document).ready(function () {
             render();
 
-            // handle lastwill loading
-            $.ajax('lastwill.beacon.txt', {
-                success: function (data) {
-                    LASTWILL_DATA.beacon = data;
-                    render('lastwill');
-                }
-            });
-            $.ajax('lastwill.key.txt', {
-                success: function (data) {
-                    LASTWILL_DATA.key = data;
-                    render('lastwill');
-                },
-                error: function () {
-                    LASTWILL_DATA.key = 'N/A';
-                    render('lastwill');
-                }
-            });
-
-            // handle click
+            // handle hash/tab bi-direction binding
             $('button[data-bs-toggle="tab"]').on('show.bs.tab', function () {
                 const hash = $(this).attr('data-hash');
                 location.hash = hash;

@@ -4,9 +4,6 @@ on:
   push:
     branches: ["main"]
 
-  schedule:
-    - cron: "10 2 * * *"
-
   workflow_dispatch:
 
 permissions:
@@ -30,25 +27,14 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: setup go
-        uses: actions/setup-go@v3
-        with:
-          go-version: "^1.19.0"
-
-      - name: run auto-disclosure
-        env:
-          SECRET_KEY: ${{secrets.SECRET_KEY}}
-          EVENT_NAME: ${{github.event_name}}
-        run: go run lastwill.go -disclose
-
-      - name: setup pages
+      - name: configure pages
         uses: actions/configure-pages@v2
 
-      - name: upload artifact
+      - name: upload pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: "."
 
-      - name: deploy to GitHub Pages
+      - name: deploy pages
         id: deployment
         uses: actions/deploy-pages@v1
