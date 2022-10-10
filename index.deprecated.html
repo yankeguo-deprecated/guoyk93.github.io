@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Guo Y.K.</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="//unpkg.com/bootswatch@5.2.1/dist/flatly/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css"/>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        img.avatar {
+            width: 80%;
+        }
+
+        img.advcash-logo {
+            width: 60%;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        img.crypto-logo {
+            height: 1rem;
+        }
+
+        td.info-header {
+            width: 1.4rem;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+        }
+
+        td.crypto-address {
+            word-break: break-all;
+        }
+
+        h5.tab-title {
+            margin-bottom: 0.2rem;
+            margin-top: 0.2rem;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-md-5 col-lg-4 col-xl-3">
+            <div class="row">
+                <div class="col text-center">
+                    <img class="avatar rounded-circle" src="img/avatar-tincan.jpg" alt="avatar-image"/>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <h4><b>Guo Y.K.</b></h4>
+                    <p>A half-lying veteran in programming</p>
+                </div>
+                <div class="row">
+                    <div id="inject-infos" class="col"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 col-lg-8 col-xl-9">
+            <ul class="nav nav-pills" id="main-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-hash="projects" id="projects-tab" data-bs-toggle="tab"
+                            data-bs-target="#projects-tab-pane" type="button" role="tab"
+                            aria-controls="projects-tab-pane" aria-selected="false">
+                        <h5 class="tab-title"><i class="fa fa-cubes"></i>&nbsp;&nbsp;Projects</h5>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-hash="donation" id="donation-tab" data-bs-toggle="tab"
+                            data-bs-target="#donation-tab-pane" type="button" role="tab"
+                            aria-controls="donation-tab-pane" aria-selected="true">
+                        <h5 class="tab-title"><i class="fa fa-money"></i>&nbsp;&nbsp;Donation</h5>
+                    </button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-hash="lastwill" id="lastwill-tab" data-bs-toggle="tab"
+                            data-bs-target="#lastwill-tab-pane" type="button" role="tab"
+                            aria-controls="lastwill-tab-pane" aria-selected="false">
+                        <h5 class="tab-title text-white"><i class="fa fa-file-o"></i>&nbsp;&nbsp;Last Will</h5>
+                    </button>
+                </li>
+            </ul>
+            <hr/>
+            <div class="tab-content mt-3" id="main-tab-content">
+                <div class="tab-pane fade show active" id="projects-tab-pane" role="tabpanel"
+                     aria-labelledby="projects-tab" tabindex="0">
+                    <div id="inject-projects" class="row mt-2 row-cols-1 row-cols-md-2 row-cols-lg-3"></div>
+                </div>
+
+                <div class="tab-pane fade" id="donation-tab-pane" role="tabpanel" aria-labelledby="donation-tab"
+                     tabindex="1">
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5><b><i class="fa fa-bank"></i>&nbsp;&nbsp;FIAT Money</b></h5>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2 row-cols-2 row-cols-lg-3 row-cols-xl-4">
+                        <div class="col mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title"><b><i class="fa fa-cny"></i>&nbsp;&nbsp;CNY</b></h5>
+                                    <div class="text-center">
+                                        <img alt="donation code for weixin" class="w-100"
+                                             src="img/donation-wx.png"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title"><b><i class="fa fa-dollar"></i>&nbsp;&nbsp;USD / <i
+                                            class="fa fa-euro"></i>&nbsp;&nbsp;EUR</b></h5>
+                                    <div class="text-center">
+                                        <img alt="advcash logo" class="w-75 mt-5 mb-4" src="img/advcash-logo.svg"/>
+                                        <h4><a href="https://advcash.com"
+                                               target="_blank">Advcash&nbsp;&nbsp;<small><i
+                                                class="fa fa-external-link"></i></small></a></h4>
+                                        <br/>
+                                        <b><i class="fa fa-dollar"></i>&nbsp;&nbsp;<code>U012254891548</code></b>
+                                        <br/>
+                                        <b><i class="fa fa-euro"></i>&nbsp;&nbsp;<code>E531054054212</code></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5><b><i class="fa fa-bitcoin"></i>&nbsp;&nbsp;Cryptocurrency</b></h5>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div id="inject-donation-crypto" class="col-12"></div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="lastwill-tab-pane" role="tabpanel" aria-labelledby="lastwill-tab"
+                     tabindex="2">
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            Jump to <a target="_blank" href="/lastwill">
+                            automatic disclosure system for my last will&nbsp;&nbsp;<i
+                                class="fa fa-external-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="//unpkg.com/jquery@3.6.1/dist/jquery.min.js"></script>
+<script src="//unpkg.com/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="//unpkg.com/handlebars@4.7.7/dist/handlebars.min.js"></script>
+<script id="template-infos" type="text/x-handlebars-template">
+    <table class="table table-borderless">
+        {{#each items}}
+            <tr>
+                <td class="info-header text-center"><i class="fa fa-{{this.icon}}"></i></td>
+                <td>
+                    {{#if this.link}}
+                        <a target="_blank" href="{{this.link}}">
+                            {{this.text}}&nbsp;&nbsp;<i class="fa fa-external-link"></i>
+                        </a>
+                    {{else}}
+                        {{this.text}}
+                    {{/if}}
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+</script>
+<script id="template-projects" type="text/x-handlebars-template">
+    {{#each items}}
+        <div class="col mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <b>
+                            <i class="fa fa-cube"></i>&nbsp;&nbsp;{{this.remote.name}}
+                        </b>
+
+                    </h5>
+                    <p class="card-text">
+                        {{#if this.remote.language}}
+                            <span class="badge text-bg-primary">{{this.remote.language}}</span>
+                        {{/if}}
+
+                        {{#if this.remote.license}}
+                            {{#if this.remote.license.spdx_id}}
+                                <span class="badge text-bg-secondary">{{this.remote.license.spdx_id}}</span>
+                            {{/if}}
+                        {{/if}}
+
+                        {{#each this.remote.topics}}
+                            <span class="badge text-bg-light">{{this}}</span>
+                        {{/each}}
+                    </p>
+                    <p class="card-text">{{this.remote.description}}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <span>
+                        <i class="fa fa-heart"></i>&nbsp;&nbsp;{{this.remote.stargazers_count}}
+                    </span>
+                    <span>
+                        <a href="{{this.remote.html_url}}" target="_blank">
+                            {{this.remote.full_name}}&nbsp;&nbsp;<i class="fa fa-external-link"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</script>
+<script id="template-donation-crypto" type="text/x-handlebars-template">
+    <table class="table">
+        {{#each items}}
+            <tr>
+                <td class="info-header text-center border-bottom-0">
+                    <img alt="logo for {{this.id}}" class="crypto-logo d-inline" src="img/{{this.logo}}"/>
+                </td>
+                <td class="border-bottom-0">
+                    {{this.id}} ({{this.name}})
+                </td>
+                <td class="border-bottom-0 text-end">
+                    <a href="{{this.link}}" target="_blank">View&nbsp;&nbsp;<i class="fa fa-external-link"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="crypto-address">
+                    <code>{{this.address}}</code>
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+</script>
+<script>
+    (function () {
+        const TEMPLATE_DATA = {
+            'infos': {
+                items: [
+                    {icon: 'envelope-o', text: 'hi@guoyk.net', link: 'mailto:hi@guoyk.net'},
+                    {icon: 'lock', text: 'GPG/Portable (Daily)', link: 'gpg-315a5d46a979a359.asc.txt'},
+                    {icon: 'lock', text: 'GPG/Hardware (Root)', link: 'gpg-925113acaf10abb1.asc.txt'},
+                    {icon: 'suitcase', text: 'Pagoda Inc., China'},
+                    {icon: 'location-arrow', text: 'Shenzhen, China'},
+                ]
+            },
+            'projects': {
+                _remote: {
+                    name: '------',
+                    full_name: '',
+                    html_url: '',
+                    topics: [],
+                    license: {
+                        spdx_id: '',
+                    },
+                    language: '',
+                    stargazers_count: '-',
+                    description: 'Loading...'
+                },
+                items: [
+                    {_remote: 'https://api.github.com/repos/guoyk93/minit'},
+                    {_remote: 'https://api.github.com/repos/guoyk93/ezadmis'},
+                    {_remote: 'https://api.github.com/repos/guoyk93/ezops'},
+                    {_remote: 'https://api.github.com/repos/guoyk93/imapdump'},
+                    {_remote: 'https://api.github.com/repos/guoyk93/gitdump'},
+                    {_remote: 'https://api.github.com/repos/guoyk93/grace'},
+                    {_remote: 'https://api.github.com/repos/guoyk93/git-evac'},
+                ],
+            },
+            'donation-crypto': {
+                items: [
+                    {
+                        name: "Bitcoin",
+                        logo: "bitcoin-btc-logo.png",
+                        id: "BTC",
+                        address: "bc1q5s6wwn3f4nj9sygv9fzwzuuuqqve0323mnwf8e",
+                        link: "https://www.blockchain.com/btc/address/bc1q5s6wwn3f4nj9sygv9fzwzuuuqqve0323mnwf8e"
+                    },
+                    {
+                        name: "Ethereum",
+                        logo: "ethereum-eth-logo.png",
+                        id: "ETH",
+                        address: "0xCcf1eB465a1DAcAF10B2350D687A558c68F8a41e",
+                        link: "https://www.blockchain.com/eth/address/0xCcf1eB465a1DAcAF10B2350D687A558c68F8a41e"
+                    },
+                    {
+                        name: "Cardano",
+                        logo: "cardano-ada-logo.png",
+                        id: "ADA",
+                        address: "addr1q8xpfwdxdmt6spdf9f2qjmw8snrkxj5r8pehct393hec4k85e5kxfgh2qng0mgw6z5pzkhjeqq9lhdkptdya6spwjg0q8mhuj9",
+                        link: "https://cardanoscan.io/address/01cc14b9a66ed7a805a92a54096dc784c7634a8338737c2e258df38ad8f4cd2c64a2ea04d0fda1da15022b5e59000bfbb6c15b49dd402e921e"
+                    },
+                    {
+                        name: 'Zcash',
+                        logo: "zcash-zec-logo.png",
+                        id: 'ZEC',
+                        address: "t1UaDf3RdqfPyaZ9txJ9bLXvjCMdhFT7PQ5",
+                        link: "https://blockchair.com/zcash/address/t1UaDf3RdqfPyaZ9txJ9bLXvjCMdhFT7PQ5"
+                    }
+                ]
+            }
+        };
+
+        const TEMPLATES = {};
+
+        function render(key) {
+            if (!key) {
+                for (const key of Object.keys(TEMPLATE_DATA)) {
+                    render(key);
+                }
+            } else {
+                if (!TEMPLATES[key]) {
+                    TEMPLATES[key] = Handlebars.compile($("#template-" + key).text());
+                }
+                const data = TEMPLATE_DATA[key];
+                if (Array.isArray(data.items)) {
+                    for (const item of data.items) {
+                        if (item._remote) {
+                            if (!item.remote) {
+                                item.remote = data._remote;
+                            }
+                            if (!item._remote_fetched) {
+                                item._remote_fetched = true;
+                                $.ajax(item._remote, {
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        item.remote = data
+                                        render(key);
+                                    },
+                                });
+                            }
+                        }
+                    }
+                }
+                $("#inject-" + key).html(TEMPLATES[key](data));
+            }
+        }
+
+
+        $(document).ready(function () {
+            render();
+
+            // handle hash/tab bi-direction binding
+            $('button[data-bs-toggle="tab"]').on('show.bs.tab', function () {
+                const hash = $(this).attr('data-hash');
+                location.hash = hash;
+            });
+
+            (function () {
+                const hash = location.hash;
+                if (hash) {
+                    $('button[data-hash="' + hash.substring(1) + '"]').click();
+                }
+            })();
+        });
+    })();
+</script>
+</body>
+
+</html>
